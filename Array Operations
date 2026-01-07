@@ -1,0 +1,154 @@
+import java.util.Scanner;
+
+public class ArrayOperations {
+
+    static int[] arr;
+    static int size;
+    static int capacity;
+
+    // DISPLAY ARRAY
+    static void display() {
+        if (size == 0) {
+            System.out.println("Array is empty");
+            return;
+        }
+        System.out.print("Array elements: ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    // INSERT AT START
+    static void insertAtStart(int value) {
+        if (size == capacity) {
+            System.out.println("Array Overflow!");
+            return;
+        }
+        for (int i = size; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = value;
+        size++;
+        System.out.println(value + " inserted at start");
+    }
+
+    // INSERT AT END
+    static void insertAtEnd(int value) {
+        if (size == capacity) {
+            System.out.println("Array Overflow!");
+            return;
+        }
+        arr[size++] = value;
+        System.out.println(value + " inserted at end");
+    }
+
+    // INSERT AT MIDDLE
+    static void insertAtMiddle(int value) {
+        if (size == capacity) {
+            System.out.println("Array Overflow!");
+            return;
+        }
+        int mid = size / 2;
+        for (int i = size; i > mid; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[mid] = value;
+        size++;
+        System.out.println(value + " inserted at middle index " + mid);
+    }
+
+    // DELETE AT START
+    static void deleteAtStart() {
+        if (size == 0) {
+            System.out.println("Array Underflow!");
+            return;
+        }
+        System.out.println(arr[0] + " deleted from start");
+        for (int i = 0; i < size - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--;
+    }
+
+    // DELETE AT END
+    static void deleteAtEnd() {
+        if (size == 0) {
+            System.out.println("Array Underflow!");
+            return;
+        }
+        System.out.println(arr[size - 1] + " deleted from end");
+        size--;
+    }
+
+    // DELETE AT MIDDLE
+    static void deleteAtMiddle() {
+        if (size == 0) {
+            System.out.println("Array Underflow!");
+            return;
+        }
+        int mid = size / 2;
+        System.out.println(arr[mid] + " deleted from middle index " + mid);
+        for (int i = mid; i < size - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array capacity: ");
+        capacity = sc.nextInt();
+        arr = new int[capacity];
+        size = 0;
+
+        while (true) {
+            System.out.println("\n--- ARRAY OPERATIONS ---");
+            System.out.println("1. Insert at Start");
+            System.out.println("2. Insert at Middle");
+            System.out.println("3. Insert at End");
+            System.out.println("4. Delete at Start");
+            System.out.println("5. Delete at Middle");
+            System.out.println("6. Delete at End");
+            System.out.println("7. Display Array");
+            System.out.println("8. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter value: ");
+                    insertAtStart(sc.nextInt());
+                    break;
+                case 2:
+                    System.out.print("Enter value: ");
+                    insertAtMiddle(sc.nextInt());
+                    break;
+                case 3:
+                    System.out.print("Enter value: ");
+                    insertAtEnd(sc.nextInt());
+                    break;
+                case 4:
+                    deleteAtStart();
+                    break;
+                case 5:
+                    deleteAtMiddle();
+                    break;
+                case 6:
+                    deleteAtEnd();
+                    break;
+                case 7:
+                    display();
+                    break;
+                case 8:
+                    System.out.println("Exiting...");
+                    sc.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}
